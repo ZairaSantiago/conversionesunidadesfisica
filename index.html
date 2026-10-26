@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Unidades</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #edf3f6;
+            color: #17354a;
+        }
+
+        header {
+            background: linear-gradient(135deg, #123c58, #1c7188);
+            color: white;
+            text-align: center;
+            padding: 38px 20px 45px;
+        }
+
+        header h1 {
+            margin: 0 0 12px;
+            font-size: 34px;
+        }
+
+        header p {
+            margin: 0;
+            line-height: 1.6;
+            color: #e1f3f6;
+        }
+           .nombre-alumna {
+            margin-top: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            line-height: 1.8;
+        }
+
+
+        main {
+            max-width: 650px;
+            margin: -20px auto 40px;
+            padding: 0 18px;
+        }
+
+        section {
+            background: white;
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: 0 8px 28px rgba(23, 53, 74, 0.10);
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 22px;
+            margin-bottom: 9px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            color: #17354a;
+            border: 1px solid #cbd5df;
+            border-radius: 12px;
+            background: white;
+            transition: all 0.25s ease;
+        }
+
+        select:focus,
+        input:focus {
+            outline: none;
+            border-color: #1c7188;
+            box-shadow: 0 0 0 3px rgba(28, 113, 136, 0.15);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 17px;
+            border: none;
+            border-radius: 12px;
+            background: #1c7188;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(23, 53, 74, 0.10);
+            transition: all 0.25s ease;
+        }
+
+        button:hover {
+            filter: brightness(1.08);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #intercambiar {
+            background: #dfe7ea;
+            color: #17354a;
+        }
+
+        #limpiar {
+            background: #f0f4f6;
+            color: #17354a;
+            border: 1px solid #d5e0e5;
+        }
+
+        #resultado {
+            margin-top: 25px;
+            padding: 22px;
+            border: 1px solid #c5e4e9;
+            border-radius: 16px;
+            background: #e6f5f8;
+            overflow-wrap: anywhere;
+        }
+
+        #resultado p {
+            color: #58717a;
+            margin: 0 0 10px;
+            line-height: 1.5;
+        }
+
+        #valorResultado {
+            font-size: 27px;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 0 20px 25px;
+            color: #58717a;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 32px 16px 40px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            main {
+                padding: 0 12px;
+            }
+
+            section {
+                padding: 21px;
+            }
+
+            #valorResultado {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Conversor de Unidades</h1>
+        <p>
+            Sistema Internacional y sistema inglés.<br>
+            Basado en el Apéndice G: Factores de conversión.
+        </p>
+
+        <p class="nombre-alumna">
+            Alumna: Zaira Marlen Almaraz Santiago<br>
+            1A Ing. Informática
+        </p>
+
+    </header>
+
+    <main>
+        <section>
+            <h2>Convertir unidades</h2>
+
+            <label for="categoria">Categoría</label>
+            <select id="categoria">
+                <option value="">Selecciona una categoría</option>
+                <option value="angulo">Ángulo plano</option>
+                <option value="solido">Ángulo sólido</option>
+                <option value="longitud">Longitud</option>
+                <option value="area">Área</option>
+                <option value="volumen">Volumen</option>
+                <option value="masa">Masa</option>
+                <option value="densidad">Densidad</option>
+                <option value="tiempo">Tiempo</option>
+                <option value="velocidad">Velocidad</option>
+                <option value="fuerza">Fuerza</option>
+                <option value="energia">Energía, trabajo y calor</option>
+                <option value="presion">Presión</option>
+                <option value="potencia">Potencia</option>
+                <option value="flujo">Flujo magnético</option>
+                <option value="campo">Campo magnético</option>
+            </select>
+
+            <label for="cantidad">Cantidad</label>
+            <input
+                type="number"
+                id="cantidad"
+                placeholder="Escribe una cantidad"
+                step="any"
+            >
+
+            <label for="origen">Unidad de origen</label>
+            <select id="origen">
+                <option value="">Selecciona la unidad de origen</option>
+            </select>
+
+            <label for="destino">Unidad de destino</label>
+            <select id="destino">
+                <option value="">Selecciona la unidad de destino</option>
+            </select>
+
+            <button id="convertir" type="button">Convertir</button>
+            <button id="intercambiar" type="button">
+                Intercambiar unidades ⇅
+            </button>
+            <button id="limpiar" type="button">Limpiar</button>
+
+            <div id="resultado" aria-live="polite">
+                <p id="textoResultado">Resultado</p>
+                <h2 id="valorResultado">Aquí aparecerá el resultado</h2>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        Conversor de unidades
+    </footer>
+
+    <script>
+        /*
+         Cada factor expresa cuánto equivale una unidad
+         en la unidad base de su categoría.
+        */
+
+        const unidades = {
+            angulo: [
+                { nombre: "Grado (°)", factor: 1 },
+                { nombre: "Minuto de arco (')", factor: 1 / 60 },
+                { nombre: "Segundo de arco (″)", factor: 1 / 3600 },
+                { nombre: "Radián (rad)", factor: 57.30 },
+                { nombre: "Revolución (rev)", factor: 360 }
+            ],
+
+            solido: [
+                { nombre: "Estereorradián (sr)", factor: 1 },
+                { nombre: "Esfera completa (4π sr)", factor: 4 * Math.PI }
+            ],
+
+            longitud: [
+                { nombre: "Angström (Å)", factor: 1e-10 },
+                { nombre: "Fermi (fm)", factor: 1e-15 },
+                { nombre: "Nanómetro (nm)", factor: 1e-9 },
+                { nombre: "Radio de Bohr (a₀)", factor: 5.292e-11 },
+                { nombre: "Micrómetro (μm)", factor: 1e-6 },
+                { nombre: "Milímetro (mm)", factor: 0.001 },
+                { nombre: "Centímetro (cm)", factor: 0.01 },
+                { nombre: "Metro (m)", factor: 1 },
+                { nombre: "Kilómetro (km)", factor: 1000 },
+                { nombre: "Pulgada (in)", factor: 0.0254 },
+                { nombre: "Pie (ft)", factor: 0.3048 },
+                { nombre: "Yarda (yd)", factor: 0.9144 },
+                { nombre: "Rod", factor: 5.0292 },
+                { nombre: "Mil", factor: 0.0000254 },
+                { nombre: "Milla (mi)", factor: 1609.344 },
+                { nombre: "Milla náutica (nmi)", factor: 1852 },
+                { nombre: "Fathom", factor: 1.8288 },
+                { nombre: "Año luz (ly)", factor: 9.4607e15 },
+                { nombre: "Parsec (pc)", factor: 3.0857e16 }
+            ],
+
+            area: [
+                { nombre: "Metro cuadrado (m²)", factor: 1 },
+                { nombre: "Centímetro cuadrado (cm²)", factor: 1e-4 },
+                { nombre: "Milímetro cuadrado (mm²)", factor: 1e-6 },
+                { nombre: "Pie cuadrado (ft²)", factor: 0.09290304 },
+                { nombre: "Pulgada cuadrada (in²)", factor: 0.00064516 },
+                { nombre: "Hectárea (ha)", factor: 10000 },
+                { nombre: "Acre", factor: 4046.8564224 },
+                { nombre: "Milla cuadrada (mi²)", factor: 2589988.110336 },
+                { nombre: "Barnio (b)", factor: 1e-28 }
+            ],
+
+            volumen: [
+                { nombre: "Metro cúbico (m³)", factor: 1 },
+                { nombre: "Centímetro cúbico (cm³)", factor: 1e-6 },
+                { nombre: "Milímetro cúbico (mm³)", factor: 1e-9 },
+                { nombre: "Litro (L)", factor: 0.001 },
+                { nombre: "Mililitro (mL)", factor: 1e-6 },
+                { nombre: "Pie cúbico (ft³)", factor: 0.0283168466 },
+                { nombre: "Pulgada cúbica (in³)", factor: 0.000016387064 },
+                { nombre: "Galón estadounidense (US gal)", factor: 0.003785411784 },
+                { nombre: "Cuarto estadounidense (US qt)", factor: 0.000946352946 },
+                { nombre: "Pinta estadounidense (US pt)", factor: 0.000473176473 },
+                { nombre: "Onza fluida estadounidense (US fl oz)", factor: 0.0000295735296 },
+                { nombre: "Galón imperial (Imp gal)", factor: 0.00454609 }
+            ],
+
+            masa: [
+                { nombre: "Miligramo (mg)", factor: 1e-6 },
+                { nombre: "Gramo (g)", factor: 0.001 },
+                { nombre: "Kilogramo (kg)", factor: 1 },
+                { nombre: "Slug", factor: 14.59390294 },
+                { nombre: "Unidad de masa atómica (u)", factor: 1.6605390666e-27 },
+                { nombre: "Onza (oz)", factor: 0.028349523125 },
+                { nombre: "Libra (lb)", factor: 0.45359237 },
+                { nombre: "Tonelada corta (ton)", factor: 907.18474 },
+                { nombre: "Tonelada métrica (t)", factor: 1000 }
+            ],
+
+            densidad: [
+                { nombre: "Kilogramo/m³ (kg/m³)", factor: 1 },
+                { nombre: "Slug/ft³", factor: 515.3788 },
+                { nombre: "Gramo/cm³ (g/cm³)", factor: 1000 },
+                { nombre: "Libra/ft³ (lb/ft³)", factor: 16.01846 },
+                { nombre: "Libra/in³ (lb/in³)", factor: 27679.9 }
+            ],
+
+            tiempo: [
+                { nombre: "Año de 365.25 días", factor: 31557600 },
+                { nombre: "Día (d)", factor: 86400 },
+                { nombre: "Hora (h)", factor: 3600 },
+                { nombre: "Minuto (min)", factor: 60 },
+                { nombre: "Segundo (s)", factor: 1 },
+                { nombre: "Milisegundo (ms)", factor: 0.001 }
+            ],
+
+            velocidad: [
+                { nombre: "Metro/segundo (m/s)", factor: 1 },
+                { nombre: "Centímetro/segundo (cm/s)", factor: 0.01 },
+                { nombre: "Kilómetro/hora (km/h)", factor: 1 / 3.6 },
+                { nombre: "Pie/segundo (ft/s)", factor: 0.3048 },
+                { nombre: "Milla/hora (mi/h)", factor: 0.44704 },
+                { nombre: "Nudo (kn)", factor: 0.5144444444 }
+            ],
+
+            fuerza: [
+                { nombre: "Newton (N)", factor: 1 },
+                { nombre: "Dina (dyn)", factor: 1e-5 },
+                { nombre: "Libra-fuerza (lbf)", factor: 4.448221615 },
+                { nombre: "Poundal (pdl)", factor: 0.138254954 },
+                { nombre: "Gramo-fuerza (gf)", factor: 0.00980665 },
+                { nombre: "Kilogramo-fuerza (kgf)", factor: 9.80665 }
+            ],
+
+            energia: [
+                { nombre: "Joule (J)", factor: 1 },
+                { nombre: "Btu", factor: 1055.055852 },
+                { nombre: "Erg", factor: 1e-7 },
+                { nombre: "Libra-pie (ft·lb)", factor: 1.355817948 },
+                { nombre: "Caballo de fuerza-hora (hp·h)", factor: 2684519.538 },
+                { nombre: "Caloría (cal)", factor: 4.1868 },
+                { nombre: "Kilowatt-hora (kWh)", factor: 3600000 },
+                { nombre: "Electrón-volt (eV)", factor: 1.602176634e-19 },
+                { nombre: "Mega-electrón-volt (MeV)", factor: 1.602176634e-13 }
+            ],
+
+            presion: [
+                { nombre: "Pascal (Pa)", factor: 1 },
+                { nombre: "Atmósfera (atm)", factor: 101325 },
+                { nombre: "Dina/cm²", factor: 0.1 },
+                { nombre: "Pulgada de agua", factor: 249.0889 },
+                { nombre: "Centímetro de mercurio (cm Hg)", factor: 1333.22 },
+                { nombre: "Libra/pulgada² (psi)", factor: 6894.757293 },
+                { nombre: "Libra/pie² (lb/ft²)", factor: 47.88025898 }
+            ],
+
+            potencia: [
+                { nombre: "Watt (W)", factor: 1 },
+                { nombre: "Btu/h", factor: 0.29307107 },
+                { nombre: "Libra-pie/segundo (ft·lb/s)", factor: 1.355817948 },
+                { nombre: "Caballo de fuerza (hp)", factor: 745.699872 },
+                { nombre: "Caloría/segundo (cal/s)", factor: 4.1868 },
+                { nombre: "Kilowatt (kW)", factor: 1000 }
+            ],
+
+            flujo: [
+                { nombre: "Weber (Wb)", factor: 1 },
+                { nombre: "Maxwell (Mx)", factor: 1e-8 }
+            ],
+
+            campo: [
+                { nombre: "Tesla (T)", factor: 1 },
+                { nombre: "Gauss (G)", factor: 1e-4 },
+                { nombre: "Milligauss (mG)", factor: 1e-7 }
+            ]
+        };
+
+        const categoria = document.getElementById("categoria");
+        const origen = document.getElementById("origen");
+        const destino = document.getElementById("destino");
+        const cantidad = document.getElementById("cantidad");
+        const botonConvertir = document.getElementById("convertir");
+        const botonIntercambiar = document.getElementById("intercambiar");
+        const botonLimpiar = document.getElementById("limpiar");
+        const valorResultado = document.getElementById("valorResultado");
+        const textoResultado = document.getElementById("textoResultado");
+
+        categoria.addEventListener("change", function () {
+            origen.innerHTML = "";
+            destino.innerHTML = "";
+
+            valorResultado.textContent = "Aquí aparecerá el resultado";
+            textoResultado.textContent = "Resultado";
+
+            const lista = unidades[categoria.value];
+
+            if (!lista) {
+                origen.add(new Option("Selecciona la unidad de origen", ""));
+                destino.add(new Option("Selecciona la unidad de destino", ""));
+                return;
+            }
+
+            origen.add(new Option("Selecciona la unidad de origen", ""));
+            destino.add(new Option("Selecciona la unidad de destino", ""));
+
+            lista.forEach(function (unidad) {
+                origen.add(new Option(unidad.nombre, unidad.factor));
+                destino.add(new Option(unidad.nombre, unidad.factor));
+            });
+
+            if (destino.options.length > 2) {
+                destino.selectedIndex = 2;
+            }
+        });
+
+        botonConvertir.addEventListener("click", function () {
+            const numero = Number(cantidad.value);
+            const factorOrigen = Number(origen.value);
+            const factorDestino = Number(destino.value);
+
+            if (
+                cantidad.value.trim() === "" ||
+                !Number.isFinite(numero) ||
+                origen.value === "" ||
+                destino.value === ""
+            ) {
+                textoResultado.textContent = "Aviso";
+                valorResultado.textContent =
+                    "Completa la cantidad y selecciona ambas unidades.";
+                return;
+            }
+
+            const resultado = numero * factorOrigen / factorDestino;
+
+            if (!Number.isFinite(resultado)) {
+                textoResultado.textContent = "Aviso";
+                valorResultado.textContent =
+                    "No se pudo realizar la conversión.";
+                return;
+            }
+
+            const unidadOrigen =
+                origen.options[origen.selectedIndex].text;
+
+            const unidadDestino =
+                destino.options[destino.selectedIndex].text;
+
+            textoResultado.textContent =
+                numero.toLocaleString("es-MX", {
+                    maximumFractionDigits: 8
+                }) + " " + unidadOrigen + " equivalen a";
+
+            valorResultado.textContent =
+                resultado.toLocaleString("es-MX", {
+                    maximumFractionDigits: 8
+                }) + " " + unidadDestino;
+        });
+
+        botonIntercambiar.addEventListener("click", function () {
+            if (origen.value === "" || destino.value === "") {
+                textoResultado.textContent = "Aviso";
+                valorResultado.textContent =
+                    "Primero selecciona una categoría y las unidades.";
+                return;
+            }
+
+            const unidadAnterior = origen.value;
+            origen.value = destino.value;
+            destino.value = unidadAnterior;
+        });
+
+        botonLimpiar.addEventListener("click", function () {
+            cantidad.value = "";
+            categoria.selectedIndex = 0;
+
+            origen.innerHTML = "";
+            destino.innerHTML = "";
+
+            origen.add(new Option("Selecciona la unidad de origen", ""));
+            destino.add(new Option("Selecciona la unidad de destino", ""));
+
+            textoResultado.textContent = "Resultado";
+            valorResultado.textContent = "Aquí aparecerá el resultado";
+        });
+    </script>
+
+</body>
+</html>
